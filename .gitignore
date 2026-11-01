@@ -1,3 +1,6 @@
 sample-data/NE1_50M_SR_W.tif
 sample-data/NE1_50M_SR_W.tfw
 .ipynb_checkpoints/
+sample-data/*.zip
+sample-data/wc2.1_*
+__pycache__/
