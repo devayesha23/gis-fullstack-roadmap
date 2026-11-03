@@ -4,3 +4,4 @@ sample-data/NE1_50M_SR_W.tfw
 sample-data/*.zip
 sample-data/wc2.1_*
 __pycache__/
+.pytest_cache/ 
