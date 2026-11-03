@@ -2,7 +2,10 @@ import os
 from getpass import getpass
 from urllib.parse import quote_plus
 
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import create_engine, text
 
 app = FastAPI(title="Region elevation API")
@@ -57,6 +60,9 @@ def regions(code: str, engtype: str | None = None):
         props = {k: v for k, v in r.items() if k != "geom"}
         features.append({"type": "Feature", "geometry": r["geom"], "properties": props})
     return {"type": "FeatureCollection", "features": features}
+
+
+app.mount("/map", StaticFiles(directory=Path(__file__).resolve().parents[1] / "web", html=True), name="map")
 
 
 if __name__ == "__main__":
