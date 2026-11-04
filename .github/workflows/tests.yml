@@ -12,3 +12,17 @@ jobs:
           python-version: "3.11"
       - run: pip install geopandas rasterio rasterstats shapely numpy sqlalchemy fastapi httpx pytest
       - run: python -m pytest -q
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t region-api .
+      - run: docker run -d -p 8000:8000 --name api region-api
+      - run: |
+          for i in $(seq 1 20); do
+            curl -fs http://127.0.0.1:8000/health && exit 0
+            sleep 1
+          done
+          docker logs api
+          exit 1
+      - run: curl -fs http://127.0.0.1:8000/map/ | grep -i maplibre

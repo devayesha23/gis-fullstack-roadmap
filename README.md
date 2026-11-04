@@ -48,3 +48,7 @@ Averages are weighted by pixel count, not a plain average of region averages.
 ## Notebooks
 
 Day-by-day practice: environment setup, GeoPandas, PostGIS, raster clipping and zonal statistics.
+
+## Docker
+
+`docker build -t region-api .` builds the API image. Run it with `docker run -p 8000:8000 -e PGPASSWORD=... -e PGHOST=<database host> region-api`. The CI workflow builds the image and checks `/health` and `/map/` on every push.

@@ -17,7 +17,7 @@ def engine():
     if _engine is None:
         pw = quote_plus(os.environ["PGPASSWORD"])
         _engine = create_engine(
-            f"postgresql+psycopg2://postgres:{pw}@localhost:5432/gis_refresh"
+            f"postgresql+psycopg2://postgres:{pw}@{os.environ.get('PGHOST', 'localhost')}:5432/gis_refresh"
         )
     return _engine
 
