@@ -1,5 +1,7 @@
 # GIS Full-Stack Roadmap
 
+![tests](https://github.com/devayesha23/gis-fullstack-roadmap/actions/workflows/tests.yml/badge.svg)
+
 Learning in public: GIS development notes, notebooks and one small data pipeline.
 
 ## Spatial ETL: average elevation per region
