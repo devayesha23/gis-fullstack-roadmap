@@ -38,17 +38,19 @@ function esc(s) {
 async function load() {
   msg.textContent = 'Loading...';
   const url = '/regions/' + sel.value + (prov.checked ? '?engtype=Province' : '');
-  const r = await fetch(url);
+  let r;
+  try { r = await fetch(url); } catch (err) { msg.textContent = 'Cannot reach the API. Is the server running?'; return; }
   if (!r.ok) {
     const e = await r.json();
     msg.textContent = e.detail || 'Error';
     return;
   }
   const fc = await r.json();
+  document.querySelectorAll('.maplibregl-popup').forEach(x => x.remove());
   map.getSource('regions').setData(fc);
   const b = new maplibregl.LngLatBounds();
-  fc.features.forEach(f => extend(b, f.geometry.coordinates));
-  map.fitBounds(b, {padding: 30});
+  fc.features.forEach(f => { if (f.geometry && f.geometry.coordinates) extend(b, f.geometry.coordinates); });
+  if (!b.isEmpty()) map.fitBounds(b, {padding: 30});
   msg.textContent = fc.features.length + ' regions';
 }
 
