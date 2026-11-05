@@ -5,3 +5,4 @@ sample-data/*.zip
 sample-data/wc2.1_*
 __pycache__/
 .pytest_cache/ 
+app.db

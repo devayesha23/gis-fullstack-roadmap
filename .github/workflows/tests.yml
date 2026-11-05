@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install geopandas rasterio rasterstats shapely numpy sqlalchemy fastapi httpx pytest
+      - run: pip install geopandas rasterio rasterstats shapely numpy sqlalchemy fastapi httpx pytest pyjwt
       - run: python -m pytest -q
   docker:
     runs-on: ubuntu-latest

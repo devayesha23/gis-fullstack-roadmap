@@ -9,6 +9,10 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import create_engine, text
 
 app = FastAPI(title="Region elevation API")
+
+from auth import router as auth_router  # noqa: E402
+
+app.include_router(auth_router)
 _engine = None
 
 
